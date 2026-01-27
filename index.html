@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>도트 미니 플랫포머</title>
+    <style>
+      :root {
+        --sky: #93c5fd;
+        --ground: #6b4f2a;
+        --ground-dark: #4a3217;
+        --accent: #f97316;
+        --ui: #0f172a;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 20% 20%, #fde68a 0 12%, transparent 13%),
+          radial-gradient(circle at 75% 25%, #bfdbfe 0 10%, transparent 11%),
+          linear-gradient(#c7d2fe, #fef3c7);
+        font-family: "Courier New", Courier, monospace;
+        color: var(--ui);
+      }
+      .frame {
+        width: min(920px, 96vw);
+        padding: 14px;
+        background: #fff7ed;
+        border: 4px solid #111827;
+        box-shadow: 8px 8px 0 #111827;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      .pill {
+        padding: 4px 8px;
+        border: 2px solid #111827;
+        background: #fde68a;
+        font-weight: 700;
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        image-rendering: pixelated;
+        border: 4px solid #111827;
+        background: var(--sky);
+      }
+      .help {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+      }
+      button {
+        font: inherit;
+        padding: 6px 10px;
+        border: 2px solid #111827;
+        background: #a7f3d0;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <header>
+        <div class="pill">도트 미니 플랫포머</div>
+        <div id="hud">코인 0 · 남은시간 60</div>
+      </header>
+      <canvas id="game" width="480" height="270" aria-label="게임"></canvas>
+      <div class="help">
+        <div>조작: ← → 이동, ↑ 점프, R 리셋</div>
+        <button id="reset">리셋</button>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d");
+      const hud = document.getElementById("hud");
+      const resetBtn = document.getElementById("reset");
+
+      const W = canvas.width;
+      const H = canvas.height;
+      const TILE = 15;
+
+      const gravity = 0.6;
+      const moveSpeed = 1.6;
+      const jumpPower = -8.5;
+      let timeLeft = 60;
+      let coins = 0;
+
+      const keys = new Set();
+      window.addEventListener("keydown", (e) => {
+        if (["ArrowLeft", "ArrowRight", "ArrowUp", "KeyR"].includes(e.code)) {
+          e.preventDefault();
+        }
+        keys.add(e.code);
+        if (e.code === "KeyR") reset();
+      });
+      window.addEventListener("keyup", (e) => keys.delete(e.code));
+      resetBtn.addEventListener("click", reset);
+
+      const level = [
+        "................................",
+        "................................",
+        "................................",
+        "...............***..............",
+        "...............*.*..............",
+        ".....***.......*.*.....C........",
+        ".....*.*.......*.*....***.......",
+        ".....*.*.......*.*..............",
+        ".....*.*.......*.*..............",
+        "..C..*.*...C...*.*..............",
+        "*****.*.*******.*.****......****",
+        ".....*...........*.............*",
+        ".....*...........*.............*",
+        "*****.............*************",
+      ];
+
+      const solidTiles = new Set(["*", "#"]);
+      const coinTiles = new Set(["C"]);
+
+      const player = {
+        x: 32, y: 32,
+        w: 12, h: 14,
+        vx: 0, vy: 0,
+        onGround: false
+      };
+
+      const coinsLeft = new Set();
+
+      function reset() {
+        player.x = 32;
+        player.y = 32;
+        player.vx = 0;
+        player.vy = 0;
+        player.onGround = false;
+        coins = 0;
+        timeLeft = 60;
+        coinsLeft.clear();
+        for (let y = 0; y < level.length; y++) {
+          for (let x = 0; x < level[y].length; x++) {
+            if (level[y][x] === "C") coinsLeft.add(`${x},${y}`);
+          }
+        }
+      }
+
+      function getTile(x, y) {
+        if (y < 0 || y >= level.length) return "#";
+        if (x < 0 || x >= level[0].length) return "#";
+        return level[y][x];
+      }
+
+      function isSolid(x, y) {
+        return solidTiles.has(getTile(x, y));
+      }
+
+      function update(dt) {
+        player.vx = 0;
+        if (keys.has("ArrowLeft")) player.vx = -moveSpeed;
+        if (keys.has("ArrowRight")) player.vx = moveSpeed;
+        if (keys.has("ArrowUp") && player.onGround) {
+          player.vy = jumpPower;
+          player.onGround = false;
+        }
+
+        player.vy += gravity;
+
+        // X axis
+        player.x += player.vx;
+        if (player.vx !== 0) {
+          const dir = Math.sign(player.vx);
+          const edgeX = dir > 0 ? player.x + player.w : player.x;
+          const tileX = Math.floor(edgeX / TILE);
+          const top = Math.floor(player.y / TILE);
+          const bottom = Math.floor((player.y + player.h - 1) / TILE);
+          for (let ty = top; ty <= bottom; ty++) {
+            if (isSolid(tileX, ty)) {
+              if (dir > 0) {
+                player.x = tileX * TILE - player.w - 0.01;
+              } else {
+                player.x = (tileX + 1) * TILE + 0.01;
+              }
+              break;
+            }
+          }
+        }
+
+        // Y axis
+        player.y += player.vy;
+        player.onGround = false;
+        if (player.vy !== 0) {
+          const dir = Math.sign(player.vy);
+          const edgeY = dir > 0 ? player.y + player.h : player.y;
+          const tileY = Math.floor(edgeY / TILE);
+          const left = Math.floor(player.x / TILE);
+          const right = Math.floor((player.x + player.w - 1) / TILE);
+          for (let tx = left; tx <= right; tx++) {
+            if (isSolid(tx, tileY)) {
+              if (dir > 0) {
+                player.y = tileY * TILE - player.h - 0.01;
+                player.onGround = true;
+              } else {
+                player.y = (tileY + 1) * TILE + 0.01;
+              }
+              player.vy = 0;
+              break;
+            }
+          }
+        }
+
+        // Coins
+        const px = Math.floor((player.x + player.w / 2) / TILE);
+        const py = Math.floor((player.y + player.h / 2) / TILE);
+        const key = `${px},${py}`;
+        if (coinsLeft.has(key)) {
+          coinsLeft.delete(key);
+          coins += 1;
+        }
+
+        timeLeft = Math.max(0, timeLeft - dt / 1000);
+      }
+
+      function drawTile(x, y, color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x * TILE, y * TILE, TILE, TILE);
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        for (let i = 0; i < 6; i++) {
+          const bx = (i * 90 + (Date.now() / 40) % 90) % W;
+          const by = 20 + (i % 3) * 12;
+          ctx.fillRect(bx, by, 28, 8);
+        }
+
+        for (let y = 0; y < level.length; y++) {
+          for (let x = 0; x < level[y].length; x++) {
+            const t = level[y][x];
+            if (solidTiles.has(t)) {
+              drawTile(x, y, y > 8 ? "var(--ground)" : "var(--ground-dark)");
+              ctx.fillStyle = "rgba(255,255,255,0.1)";
+              ctx.fillRect(x * TILE + 2, y * TILE + 2, TILE - 4, 3);
+            }
+          }
+        }
+
+        for (const pos of coinsLeft) {
+          const [x, y] = pos.split(",").map(Number);
+          ctx.fillStyle = "#facc15";
+          ctx.fillRect(x * TILE + 4, y * TILE + 4, TILE - 8, TILE - 8);
+          ctx.fillStyle = "#fef08a";
+          ctx.fillRect(x * TILE + 6, y * TILE + 6, TILE - 12, TILE - 12);
+        }
+
+        // Player (simple dot character)
+        ctx.fillStyle = "#ef4444";
+        ctx.fillRect(player.x, player.y, player.w, player.h);
+        ctx.fillStyle = "#1f2937";
+        ctx.fillRect(player.x + 3, player.y + 4, 2, 2);
+        ctx.fillRect(player.x + 7, player.y + 4, 2, 2);
+        ctx.fillRect(player.x + 5, player.y + 9, 2, 2);
+
+        hud.textContent = `코인 ${coins} · 남은시간 ${Math.ceil(timeLeft)}`;
+      }
+
+      let last = performance.now();
+      function loop(now) {
+        const dt = now - last;
+        last = now;
+        update(dt);
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      reset();
+      requestAnimationFrame(loop);
+    </script>
+  </body>
+</html>
