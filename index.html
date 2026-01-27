@@ -1,290 +1,450 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>도트 미니 플랫포머</title>
-    <style>
-      :root {
-        --sky: #93c5fd;
-        --ground: #6b4f2a;
-        --ground-dark: #4a3217;
-        --accent: #f97316;
-        --ui: #0f172a;
-      }
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
-      body {
-        margin: 0;
-        display: grid;
-        place-items: center;
-        background:
-          radial-gradient(circle at 20% 20%, #fde68a 0 12%, transparent 13%),
-          radial-gradient(circle at 75% 25%, #bfdbfe 0 10%, transparent 11%),
-          linear-gradient(#c7d2fe, #fef3c7);
-        font-family: "Courier New", Courier, monospace;
-        color: var(--ui);
-      }
-      .frame {
-        width: min(920px, 96vw);
-        padding: 14px;
-        background: #fff7ed;
-        border: 4px solid #111827;
-        box-shadow: 8px 8px 0 #111827;
-      }
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-      .pill {
-        padding: 4px 8px;
-        border: 2px solid #111827;
-        background: #fde68a;
-        font-weight: 700;
-      }
-      canvas {
-        width: 100%;
-        height: auto;
-        image-rendering: pixelated;
-        border: 4px solid #111827;
-        background: var(--sky);
-      }
-      .help {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 12px;
-      }
-      button {
-        font: inherit;
-        padding: 6px 10px;
-        border: 2px solid #111827;
-        background: #a7f3d0;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="frame">
-      <header>
-        <div class="pill">도트 미니 플랫포머</div>
-        <div id="hud">코인 0 · 남은시간 60</div>
-      </header>
-      <canvas id="game" width="480" height="270" aria-label="게임"></canvas>
-      <div class="help">
-        <div>조작: ← → 이동, ↑ 점프, R 리셋</div>
-        <button id="reset">리셋</button>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>컬러풀 로또 5세트 추천기</title>
+  <style>
+    :root{
+      --card: rgba(255,255,255,.78);
+      --border: rgba(255,255,255,.35);
+      --shadow: 0 18px 50px rgba(0,0,0,.16);
+    }
+
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      padding:28px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+      color:#0b1020;
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(255, 99, 132, .35), transparent 60%),
+        radial-gradient(900px 600px at 90% 25%, rgba(54, 162, 235, .35), transparent 60%),
+        radial-gradient(900px 700px at 30% 95%, rgba(255, 206, 86, .35), transparent 60%),
+        radial-gradient(800px 600px at 85% 90%, rgba(153, 102, 255, .35), transparent 60%),
+        linear-gradient(135deg, #0ea5e9 0%, #a78bfa 35%, #fb7185 70%, #f59e0b 100%);
+      overflow-x:hidden;
+    }
+
+    .wrap{ max-width: 980px; margin: 0 auto; }
+
+    .header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+    }
+
+    .title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    h1{
+      margin:0;
+      font-size: 28px;
+      letter-spacing: -0.4px;
+      line-height: 1.1;
+      color:#ffffff;
+      text-shadow: 0 8px 18px rgba(0,0,0,.25);
+    }
+    .sub{
+      color: rgba(255,255,255,.9);
+      font-weight: 600;
+      text-shadow: 0 8px 18px rgba(0,0,0,.18);
+    }
+
+    .card{
+      position:relative;
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+
+    /* 반짝이는 장식 */
+    .sparkle{
+      position:absolute;
+      inset:-60px;
+      background:
+        radial-gradient(10px 10px at 10% 20%, rgba(255,255,255,.7), transparent 60%),
+        radial-gradient(12px 12px at 30% 70%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(8px 8px at 65% 35%, rgba(255,255,255,.65), transparent 60%),
+        radial-gradient(14px 14px at 80% 75%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(9px 9px at 92% 28%, rgba(255,255,255,.55), transparent 60%);
+      opacity: .55;
+      pointer-events:none;
+      animation: float 10s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{ transform: translate3d(0,0,0) rotate(0deg); }
+      50%{ transform: translate3d(10px,-8px,0) rotate(1deg); }
+    }
+
+    .controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn{
+      border: 0;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+      color:white;
+      background: linear-gradient(135deg, #22c55e, #06b6d4, #6366f1);
+      box-shadow: 0 12px 28px rgba(16, 185, 129, .25);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+
+    .btn2{
+      border: 0;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      color:#0b1020;
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn2:hover{ transform: translateY(-1px); background: rgba(255,255,255,.95); }
+    .btn2:active{ transform: translateY(1px) scale(.99); }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(255,255,255,.45);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+      font-weight: 800;
+    }
+    select{
+      border:0;
+      outline:none;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-weight: 800;
+      background: rgba(255,255,255,.9);
+      cursor:pointer;
+    }
+
+    .meta{
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(10,12,22,.75);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sets{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 760px){
+      .sets{ grid-template-columns: 1fr; }
+    }
+
+    .set{
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.45);
+      box-shadow: 0 12px 26px rgba(0,0,0,.10);
+      transition: transform .15s ease, box-shadow .15s ease;
+      overflow:hidden;
+      position:relative;
+    }
+    .set:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0,0,0,.14);
+    }
+    .set::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(34,197,94,.14), rgba(59,130,246,.14), rgba(168,85,247,.14), rgba(244,63,94,.14));
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .set-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 10px;
+    }
+    .set-title{
+      font-weight: 1000;
+      letter-spacing: -.2px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .badge{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color:#fff;
+      font-weight: 900;
+      background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
+      box-shadow: 0 10px 22px rgba(239, 68, 68, .18);
+    }
+
+    .nums{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 컬러풀 로또볼 */
+    .ball{
+      width: 46px; height: 46px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 1000;
+      color: #0b1020;
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,.55),
+        0 10px 18px rgba(0,0,0,.15);
+      user-select:none;
+      position: relative;
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+    .ball::after{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      background: radial-gradient(18px 18px at 25% 25%, rgba(255,255,255,.85), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .ball:hover{ transform: translateY(-1px) scale(1.02); transition: transform .12s ease; }
+
+    /* 번호 구간별 색상 */
+    .c1{ background: linear-gradient(135deg, #fde047, #f59e0b); }
+    .c2{ background: linear-gradient(135deg, #93c5fd, #3b82f6); color:white; }
+    .c3{ background: linear-gradient(135deg, #86efac, #22c55e); }
+    .c4{ background: linear-gradient(135deg, #c4b5fd, #8b5cf6); color:white; }
+    .c5{ background: linear-gradient(135deg, #fda4af, #ef4444); color:white; }
+
+    .bonus{
+      outline: 3px solid rgba(255,255,255,.85);
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,.6),
+        0 12px 22px rgba(239, 68, 68, .25);
+    }
+
+    .hint{
+      color: rgba(255,255,255,.95);
+      font-weight: 800;
+      margin-top: 10px;
+      text-shadow: 0 8px 18px rgba(0,0,0,.18);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="title">
+        <h1>🎉 컬러풀 로또 5세트 추천기</h1>
+        <div class="sub">버튼 한 번에 5세트! (6개 + 보너스 1개)</div>
       </div>
+      <div class="hint">행운을 빕니다 🍀</div>
     </div>
 
-    <script>
-      const canvas = document.getElementById("game");
-      const ctx = canvas.getContext("2d");
-      const hud = document.getElementById("hud");
-      const resetBtn = document.getElementById("reset");
+    <div class="card">
+      <div class="sparkle" aria-hidden="true"></div>
 
-      const W = canvas.width;
-      const H = canvas.height;
-      const TILE = 15;
+      <div class="controls">
+        <button id="btn" class="btn">🎲 5세트 생성</button>
+        <button id="copy" class="btn2" type="button">📋 전체 복사</button>
 
-      const gravity = 0.6;
-      const moveSpeed = 1.6;
-      const jumpPower = -8.5;
-      let timeLeft = 60;
-      let coins = 0;
+        <div class="chip">
+          세트 수
+          <select id="count">
+            <option value="5" selected>5</option>
+            <option value="3">3</option>
+            <option value="10">10</option>
+          </select>
+        </div>
 
-      const keys = new Set();
-      window.addEventListener("keydown", (e) => {
-        if (["ArrowLeft", "ArrowRight", "ArrowUp", "KeyR"].includes(e.code)) {
-          e.preventDefault();
-        }
-        keys.add(e.code);
-        if (e.code === "KeyR") reset();
+        <div class="chip">
+          보너스 표시
+          <select id="bonusToggle">
+            <option value="on" selected>ON</option>
+            <option value="off">OFF</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="result" class="sets" aria-live="polite"></div>
+
+      <div class="meta">
+        생성 시간: <span id="time">-</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const resultEl = document.getElementById("result");
+    const timeEl = document.getElementById("time");
+    const countEl = document.getElementById("count");
+    const bonusToggleEl = document.getElementById("bonusToggle");
+
+    function randInt(min, max){
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function pickUniqueNumbers(count, min, max){
+      const set = new Set();
+      while(set.size < count){
+        set.add(randInt(min, max));
+      }
+      return [...set].sort((a,b)=>a-b);
+    }
+
+    function colorClass(n){
+      if (n <= 10) return "c1";
+      if (n <= 20) return "c2";
+      if (n <= 30) return "c3";
+      if (n <= 40) return "c4";
+      return "c5";
+    }
+
+    function nowKST(){
+      return new Intl.DateTimeFormat("ko-KR",{
+        timeZone:"Asia/Seoul",
+        dateStyle:"medium",
+        timeStyle:"medium"
+      }).format(new Date());
+    }
+
+    function makeBall(n, extraClass=""){
+      const ball = document.createElement("div");
+      ball.className = `ball ${colorClass(n)} ${extraClass}`.trim();
+      ball.textContent = n;
+      return ball;
+    }
+
+    function generateOneSet(i, showBonus){
+      const main = pickUniqueNumbers(6, 1, 45);
+
+      let bonus = null;
+      if (showBonus){
+        do { bonus = randInt(1, 45); } while(main.includes(bonus));
+      }
+
+      const setDiv = document.createElement("div");
+      setDiv.className = "set";
+
+      const head = document.createElement("div");
+      head.className = "set-head";
+
+      const title = document.createElement("div");
+      title.className = "set-title";
+      title.innerHTML = `세트 ${i+1} <span class="badge">추천</span>`;
+
+      head.appendChild(title);
+      setDiv.appendChild(head);
+
+      const numsDiv = document.createElement("div");
+      numsDiv.className = "nums";
+
+      main.forEach(n => numsDiv.appendChild(makeBall(n)));
+
+      if (showBonus && bonus !== null){
+        numsDiv.appendChild(makeBall(bonus, "bonus"));
+      }
+
+      setDiv.appendChild(numsDiv);
+
+      return { setDiv, main, bonus };
+    }
+
+    let latest = []; // [{main:[], bonus:number|null}...]
+
+    function generateSets(){
+      const count = parseInt(countEl.value, 10);
+      const showBonus = (bonusToggleEl.value === "on");
+
+      latest = [];
+      resultEl.innerHTML = "";
+
+      for(let i=0;i<count;i++){
+        const { setDiv, main, bonus } = generateOneSet(i, showBonus);
+        latest.push({ main, bonus });
+        resultEl.appendChild(setDiv);
+      }
+
+      timeEl.textContent = nowKST();
+    }
+
+    async function copyAll(){
+      if (!latest.length){
+        alert("먼저 생성해줘 🙂");
+        return;
+      }
+      const showBonus = (bonusToggleEl.value === "on");
+      const lines = latest.map((s, idx) => {
+        const main = s.main.join(", ");
+        return showBonus
+          ? `세트 ${idx+1}: ${main} / 보너스: ${s.bonus}`
+          : `세트 ${idx+1}: ${main}`;
       });
-      window.addEventListener("keyup", (e) => keys.delete(e.code));
-      resetBtn.addEventListener("click", reset);
+      const text = lines.join("\n");
 
-      const level = [
-        "................................",
-        "................................",
-        "................................",
-        "...............***..............",
-        "...............*.*..............",
-        ".....***.......*.*.....C........",
-        ".....*.*.......*.*....***.......",
-        ".....*.*.......*.*..............",
-        ".....*.*.......*.*..............",
-        "..C..*.*...C...*.*..............",
-        "*****.*.*******.*.****......****",
-        ".....*...........*.............*",
-        ".....*...........*.............*",
-        "*****.............*************",
-      ];
-
-      const solidTiles = new Set(["*", "#"]);
-      const coinTiles = new Set(["C"]);
-
-      const player = {
-        x: 32, y: 32,
-        w: 12, h: 14,
-        vx: 0, vy: 0,
-        onGround: false
-      };
-
-      const coinsLeft = new Set();
-
-      function reset() {
-        player.x = 32;
-        player.y = 32;
-        player.vx = 0;
-        player.vy = 0;
-        player.onGround = false;
-        coins = 0;
-        timeLeft = 60;
-        coinsLeft.clear();
-        for (let y = 0; y < level.length; y++) {
-          for (let x = 0; x < level[y].length; x++) {
-            if (level[y][x] === "C") coinsLeft.add(`${x},${y}`);
-          }
-        }
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("전체 복사 완료! ✅");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        alert("전체 복사 완료! ✅");
       }
+    }
 
-      function getTile(x, y) {
-        if (y < 0 || y >= level.length) return "#";
-        if (x < 0 || x >= level[0].length) return "#";
-        return level[y][x];
-      }
+    document.getElementById("btn").addEventListener("click", generateSets);
+    document.getElementById("copy").addEventListener("click", copyAll);
+    countEl.addEventListener("change", generateSets);
+    bonusToggleEl.addEventListener("change", generateSets);
 
-      function isSolid(x, y) {
-        return solidTiles.has(getTile(x, y));
-      }
-
-      function update(dt) {
-        player.vx = 0;
-        if (keys.has("ArrowLeft")) player.vx = -moveSpeed;
-        if (keys.has("ArrowRight")) player.vx = moveSpeed;
-        if (keys.has("ArrowUp") && player.onGround) {
-          player.vy = jumpPower;
-          player.onGround = false;
-        }
-
-        player.vy += gravity;
-
-        // X axis
-        player.x += player.vx;
-        if (player.vx !== 0) {
-          const dir = Math.sign(player.vx);
-          const edgeX = dir > 0 ? player.x + player.w : player.x;
-          const tileX = Math.floor(edgeX / TILE);
-          const top = Math.floor(player.y / TILE);
-          const bottom = Math.floor((player.y + player.h - 1) / TILE);
-          for (let ty = top; ty <= bottom; ty++) {
-            if (isSolid(tileX, ty)) {
-              if (dir > 0) {
-                player.x = tileX * TILE - player.w - 0.01;
-              } else {
-                player.x = (tileX + 1) * TILE + 0.01;
-              }
-              break;
-            }
-          }
-        }
-
-        // Y axis
-        player.y += player.vy;
-        player.onGround = false;
-        if (player.vy !== 0) {
-          const dir = Math.sign(player.vy);
-          const edgeY = dir > 0 ? player.y + player.h : player.y;
-          const tileY = Math.floor(edgeY / TILE);
-          const left = Math.floor(player.x / TILE);
-          const right = Math.floor((player.x + player.w - 1) / TILE);
-          for (let tx = left; tx <= right; tx++) {
-            if (isSolid(tx, tileY)) {
-              if (dir > 0) {
-                player.y = tileY * TILE - player.h - 0.01;
-                player.onGround = true;
-              } else {
-                player.y = (tileY + 1) * TILE + 0.01;
-              }
-              player.vy = 0;
-              break;
-            }
-          }
-        }
-
-        // Coins
-        const px = Math.floor((player.x + player.w / 2) / TILE);
-        const py = Math.floor((player.y + player.h / 2) / TILE);
-        const key = `${px},${py}`;
-        if (coinsLeft.has(key)) {
-          coinsLeft.delete(key);
-          coins += 1;
-        }
-
-        timeLeft = Math.max(0, timeLeft - dt / 1000);
-      }
-
-      function drawTile(x, y, color) {
-        ctx.fillStyle = color;
-        ctx.fillRect(x * TILE, y * TILE, TILE, TILE);
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        ctx.fillStyle = "rgba(255,255,255,0.3)";
-        for (let i = 0; i < 6; i++) {
-          const bx = (i * 90 + (Date.now() / 40) % 90) % W;
-          const by = 20 + (i % 3) * 12;
-          ctx.fillRect(bx, by, 28, 8);
-        }
-
-        for (let y = 0; y < level.length; y++) {
-          for (let x = 0; x < level[y].length; x++) {
-            const t = level[y][x];
-            if (solidTiles.has(t)) {
-              drawTile(x, y, y > 8 ? "var(--ground)" : "var(--ground-dark)");
-              ctx.fillStyle = "rgba(255,255,255,0.1)";
-              ctx.fillRect(x * TILE + 2, y * TILE + 2, TILE - 4, 3);
-            }
-          }
-        }
-
-        for (const pos of coinsLeft) {
-          const [x, y] = pos.split(",").map(Number);
-          ctx.fillStyle = "#facc15";
-          ctx.fillRect(x * TILE + 4, y * TILE + 4, TILE - 8, TILE - 8);
-          ctx.fillStyle = "#fef08a";
-          ctx.fillRect(x * TILE + 6, y * TILE + 6, TILE - 12, TILE - 12);
-        }
-
-        // Player (simple dot character)
-        ctx.fillStyle = "#ef4444";
-        ctx.fillRect(player.x, player.y, player.w, player.h);
-        ctx.fillStyle = "#1f2937";
-        ctx.fillRect(player.x + 3, player.y + 4, 2, 2);
-        ctx.fillRect(player.x + 7, player.y + 4, 2, 2);
-        ctx.fillRect(player.x + 5, player.y + 9, 2, 2);
-
-        hud.textContent = `코인 ${coins} · 남은시간 ${Math.ceil(timeLeft)}`;
-      }
-
-      let last = performance.now();
-      function loop(now) {
-        const dt = now - last;
-        last = now;
-        update(dt);
-        draw();
-        requestAnimationFrame(loop);
-      }
-
-      reset();
-      requestAnimationFrame(loop);
-    </script>
-  </body>
+    // 처음 로드 시 자동 생성
+    generateSets();
+  </script>
+</body>
 </html>
