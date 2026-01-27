@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>제휴 문의</title>
+  <title>로또 추천 + 제휴 문의</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nanum+Gothic:wght@400;700&display=swap");
 
@@ -14,7 +14,8 @@
       --accent:#ff6b35;
       --accent-2:#00c2a8;
       --ring: rgba(255,107,53,.35);
-      --shadow: 0 30px 70px rgba(11,11,20,.2);
+      --shadow: 0 26px 60px rgba(11,11,20,.18);
+      --border: rgba(17,24,39,.08);
     }
 
     *{ box-sizing:border-box; }
@@ -24,98 +25,259 @@
       color:var(--ink);
       font-family:"Nanum Gothic", "Apple SD Gothic Neo", sans-serif;
       background:
-        radial-gradient(900px 700px at 15% 15%, rgba(255,107,53,.28), transparent 60%),
-        radial-gradient(800px 600px at 85% 25%, rgba(0,194,168,.25), transparent 60%),
-        radial-gradient(900px 700px at 20% 85%, rgba(255,210,117,.35), transparent 60%),
+        radial-gradient(900px 700px at 15% 15%, rgba(255,107,53,.26), transparent 60%),
+        radial-gradient(800px 600px at 85% 25%, rgba(0,194,168,.22), transparent 60%),
+        radial-gradient(900px 700px at 20% 85%, rgba(255,210,117,.3), transparent 60%),
         linear-gradient(120deg, #f8f6f1 0%, #e7f6f3 45%, #fef3ec 100%);
       padding:32px;
     }
 
     .wrap{
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto;
       display:grid;
-      gap:24px;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: stretch;
+      gap:20px;
     }
 
-    @media (max-width: 900px){
-      .wrap{ grid-template-columns: 1fr; }
+    header{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      align-items:flex-end;
+      justify-content:space-between;
     }
 
-    .hero{
-      padding:26px 28px;
-      border-radius:24px;
-      background: linear-gradient(135deg, #111827, #1f2937);
-      color:#fff;
-      position:relative;
-      overflow:hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:-30% -10% auto auto;
-      width:320px;
-      height:320px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,107,53,.6), transparent 60%);
-      transform: rotate(20deg);
-    }
-
-    .hero h1{
-      margin:0 0 12px;
+    header h1{
+      margin:0;
       font-family:"Space Grotesk", "Nanum Gothic", sans-serif;
-      font-size:34px;
+      font-size:32px;
       letter-spacing:-.4px;
     }
 
-    .hero p{
-      margin:0 0 18px;
-      color: rgba(255,255,255,.85);
-      line-height:1.5;
-    }
-
-    .hero .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .tag{
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.16);
-      color:#fff;
+    .sub{
+      color:var(--muted);
       font-weight:700;
-      font-size:13px;
-      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .layout{
+      display:grid;
+      gap:20px;
+      grid-template-columns: 1.15fr .85fr;
+      align-items:start;
+    }
+
+    @media (max-width: 980px){
+      .layout{ grid-template-columns: 1fr; }
     }
 
     .card{
       background: var(--card);
       border-radius:24px;
-      padding:26px 28px;
+      padding:22px 24px;
       box-shadow: var(--shadow);
+      border:1px solid var(--border);
+      position:relative;
+      overflow:hidden;
     }
 
-    .card h2{
+    .lotto-hero{
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color:#fff;
+      border: none;
+    }
+
+    .lotto-hero h2{
+      margin:0 0 10px;
+      font-family:"Space Grotesk", "Nanum Gothic", sans-serif;
+      font-size:26px;
+    }
+
+    .lotto-hero p{ margin:0; color: rgba(255,255,255,.85); }
+
+    .controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      margin: 12px 0 10px;
+    }
+
+    .btn{
+      border: 0;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+      color:white;
+      background: linear-gradient(135deg, #22c55e, #06b6d4, #6366f1);
+      box-shadow: 0 12px 26px rgba(16, 185, 129, .25);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+
+    .btn2{
+      border: 0;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      color:#0b1020;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn2:hover{ transform: translateY(-1px); background: rgba(255,255,255,.98); }
+    .btn2:active{ transform: translateY(1px) scale(.99); }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(255,255,255,.45);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+      font-weight: 800;
+    }
+    select{
+      border:0;
+      outline:none;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-weight: 800;
+      background: rgba(255,255,255,.95);
+      cursor:pointer;
+    }
+
+    .sets{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 760px){
+      .sets{ grid-template-columns: 1fr; }
+    }
+
+    .set{
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.45);
+      box-shadow: 0 12px 26px rgba(0,0,0,.10);
+      transition: transform .15s ease, box-shadow .15s ease;
+      overflow:hidden;
+      position:relative;
+    }
+    .set:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0,0,0,.14);
+    }
+    .set::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(34,197,94,.14), rgba(59,130,246,.14), rgba(168,85,247,.14), rgba(244,63,94,.14));
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .set-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 10px;
+    }
+    .set-title{
+      font-weight: 1000;
+      letter-spacing: -.2px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .badge{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color:#fff;
+      font-weight: 900;
+      background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
+      box-shadow: 0 10px 22px rgba(239, 68, 68, .18);
+    }
+
+    .nums{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ball{
+      width: 46px; height: 46px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 1000;
+      color: #0b1020;
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,.55),
+        0 10px 18px rgba(0,0,0,.15);
+      user-select:none;
+      position: relative;
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+    .ball::after{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      background: radial-gradient(18px 18px at 25% 25%, rgba(255,255,255,.85), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .ball:hover{ transform: translateY(-1px) scale(1.02); transition: transform .12s ease; }
+
+    .c1{ background: linear-gradient(135deg, #fde047, #f59e0b); }
+    .c2{ background: linear-gradient(135deg, #93c5fd, #3b82f6); color:white; }
+    .c3{ background: linear-gradient(135deg, #86efac, #22c55e); }
+    .c4{ background: linear-gradient(135deg, #c4b5fd, #8b5cf6); color:white; }
+    .c5{ background: linear-gradient(135deg, #fda4af, #ef4444); color:white; }
+
+    .bonus{
+      outline: 3px solid rgba(255,255,255,.85);
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,.6),
+        0 12px 22px rgba(239, 68, 68, .25);
+    }
+
+    .meta{
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(10,12,22,.75);
+      font-weight: 700;
+    }
+
+    .form-card h2{
       margin:0 0 6px;
       font-family:"Space Grotesk", "Nanum Gothic", sans-serif;
-      font-size:24px;
+      font-size:22px;
       letter-spacing:-.3px;
     }
 
-    .card p{
-      margin:0 0 18px;
+    .form-card p{
+      margin:0 0 16px;
       color:var(--muted);
     }
 
-    form{
-      display:grid;
-      gap:14px;
-    }
+    form{ display:grid; gap:14px; }
 
     label{
       display:block;
@@ -154,7 +316,7 @@
       .row{ grid-template-columns: 1fr; }
     }
 
-    .btn{
+    .submit{
       border:0;
       border-radius:14px;
       padding:14px 16px;
@@ -166,8 +328,8 @@
       transition: transform .12s ease, filter .12s ease;
     }
 
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-    .btn:active{ transform: translateY(1px) scale(.99); }
+    .submit:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+    .submit:active{ transform: translateY(1px) scale(.99); }
 
     .note{
       font-size:12px;
@@ -178,53 +340,214 @@
 </head>
 <body>
   <main class="wrap">
-    <section class="hero">
-      <h1>제휴 문의를 빠르게 연결합니다</h1>
-      <p>브랜드 협업, 공동 프로모션, 제품 연동 제안을 남겨주시면 담당자가 1-2영업일 내 확인합니다.</p>
-      <div class="tags">
-        <span class="tag">브랜드 제휴</span>
-        <span class="tag">콘텐츠 협업</span>
-        <span class="tag">API 연동</span>
-        <span class="tag">프로모션</span>
+    <header>
+      <div>
+        <h1>로또 추천 + 제휴 문의</h1>
+        <div class="sub">로또 번호 생성과 제휴 문의를 한 페이지에서 처리하세요.</div>
+      </div>
+    </header>
+
+    <section class="layout">
+      <div class="card lotto-hero">
+        <h2>컬러풀 로또 5세트 추천기</h2>
+        <p>버튼 한 번에 5세트! (6개 + 보너스 1개)</p>
+
+        <div class="controls">
+          <button id="btn" class="btn">5세트 생성</button>
+          <button id="copy" class="btn2" type="button">전체 복사</button>
+
+          <div class="chip">
+            세트 수
+            <select id="count">
+              <option value="5" selected>5</option>
+              <option value="3">3</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="chip">
+            보너스 표시
+            <select id="bonusToggle">
+              <option value="on" selected>ON</option>
+              <option value="off">OFF</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="result" class="sets" aria-live="polite"></div>
+
+        <div class="meta">
+          생성 시간: <span id="time">-</span>
+        </div>
+      </div>
+
+      <div class="card form-card">
+        <h2>제휴 문의 폼</h2>
+        <p>필수 항목만 입력해 주세요. 제출하면 Formspree로 바로 전달됩니다.</p>
+
+        <form action="https://formspree.io/f/xbdoqkdp" method="POST">
+          <div class="row">
+            <div>
+              <label for="name">담당자 이름</label>
+              <input id="name" name="name" type="text" placeholder="홍길동" required />
+            </div>
+            <div>
+              <label for="company">회사명</label>
+              <input id="company" name="company" type="text" placeholder="OOO" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="email">이메일</label>
+              <input id="email" name="email" type="email" placeholder="email@company.com" required />
+            </div>
+            <div>
+              <label for="phone">연락처</label>
+              <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" />
+            </div>
+          </div>
+
+          <div>
+            <label for="message">문의 내용</label>
+            <textarea id="message" name="message" placeholder="제휴 목적, 일정, 기대 효과 등을 적어 주세요." required></textarea>
+          </div>
+
+          <button class="submit" type="submit">제휴 문의 제출</button>
+          <p class="note">제출 시 개인정보 처리에 동의한 것으로 간주합니다.</p>
+        </form>
       </div>
     </section>
-
-    <section class="card">
-      <h2>제휴 문의 폼</h2>
-      <p>필수 항목만 입력해 주세요. 제출하면 Formspree로 바로 전달됩니다.</p>
-
-      <form action="https://formspree.io/f/xbdoqkdp" method="POST">
-        <div class="row">
-          <div>
-            <label for="name">담당자 이름</label>
-            <input id="name" name="name" type="text" placeholder="홍길동" required />
-          </div>
-          <div>
-            <label for="company">회사명</label>
-            <input id="company" name="company" type="text" placeholder="OOO" required />
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label for="email">이메일</label>
-            <input id="email" name="email" type="email" placeholder="email@company.com" required />
-          </div>
-          <div>
-            <label for="phone">연락처</label>
-            <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" />
-          </div>
-        </div>
-
-        <div>
-          <label for="message">문의 내용</label>
-          <textarea id="message" name="message" placeholder="제휴 목적, 일정, 기대 효과 등을 적어 주세요." required></textarea>
-        </div>
-
-        <button class="btn" type="submit">제휴 문의 제출</button>
-        <p class="note">제출 시 개인정보 처리에 동의한 것으로 간주합니다.</p>
-      </form>
-    </section>
   </main>
+
+  <script>
+    const resultEl = document.getElementById("result");
+    const timeEl = document.getElementById("time");
+    const countEl = document.getElementById("count");
+    const bonusToggleEl = document.getElementById("bonusToggle");
+
+    function randInt(min, max){
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function pickUniqueNumbers(count, min, max){
+      const set = new Set();
+      while(set.size < count){
+        set.add(randInt(min, max));
+      }
+      return [...set].sort((a,b)=>a-b);
+    }
+
+    function colorClass(n){
+      if (n <= 10) return "c1";
+      if (n <= 20) return "c2";
+      if (n <= 30) return "c3";
+      if (n <= 40) return "c4";
+      return "c5";
+    }
+
+    function nowKST(){
+      return new Intl.DateTimeFormat("ko-KR",{
+        timeZone:"Asia/Seoul",
+        dateStyle:"medium",
+        timeStyle:"medium"
+      }).format(new Date());
+    }
+
+    function makeBall(n, extraClass=""){
+      const ball = document.createElement("div");
+      ball.className = `ball ${colorClass(n)} ${extraClass}`.trim();
+      ball.textContent = n;
+      return ball;
+    }
+
+    function generateOneSet(i, showBonus){
+      const main = pickUniqueNumbers(6, 1, 45);
+
+      let bonus = null;
+      if (showBonus){
+        do { bonus = randInt(1, 45); } while(main.includes(bonus));
+      }
+
+      const setDiv = document.createElement("div");
+      setDiv.className = "set";
+
+      const head = document.createElement("div");
+      head.className = "set-head";
+
+      const title = document.createElement("div");
+      title.className = "set-title";
+      title.innerHTML = `세트 ${i+1} <span class="badge">추천</span>`;
+
+      head.appendChild(title);
+      setDiv.appendChild(head);
+
+      const numsDiv = document.createElement("div");
+      numsDiv.className = "nums";
+
+      main.forEach(n => numsDiv.appendChild(makeBall(n)));
+
+      if (showBonus && bonus !== null){
+        numsDiv.appendChild(makeBall(bonus, "bonus"));
+      }
+
+      setDiv.appendChild(numsDiv);
+
+      return { setDiv, main, bonus };
+    }
+
+    let latest = [];
+
+    function generateSets(){
+      const count = parseInt(countEl.value, 10);
+      const showBonus = (bonusToggleEl.value === "on");
+
+      latest = [];
+      resultEl.innerHTML = "";
+
+      for(let i=0;i<count;i++){
+        const { setDiv, main, bonus } = generateOneSet(i, showBonus);
+        latest.push({ main, bonus });
+        resultEl.appendChild(setDiv);
+      }
+
+      timeEl.textContent = nowKST();
+    }
+
+    async function copyAll(){
+      if (!latest.length){
+        alert("먼저 생성해줘 🙂");
+        return;
+      }
+      const showBonus = (bonusToggleEl.value === "on");
+      const lines = latest.map((s, idx) => {
+        const main = s.main.join(", ");
+        return showBonus
+          ? `세트 ${idx+1}: ${main} / 보너스: ${s.bonus}`
+          : `세트 ${idx+1}: ${main}`;
+      });
+      const text = lines.join("\n");
+
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("전체 복사 완료! ✅");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        alert("전체 복사 완료! ✅");
+      }
+    }
+
+    document.getElementById("btn").addEventListener("click", generateSets);
+    document.getElementById("copy").addEventListener("click", copyAll);
+    countEl.addEventListener("change", generateSets);
+    bonusToggleEl.addEventListener("change", generateSets);
+
+    generateSets();
+  </script>
 </body>
 </html>
