@@ -1,21 +1,24 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>로또 추천 + 제휴 문의</title>
+  <title>?? ?? ? ???</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nanum+Gothic:wght@400;700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap");
 
     :root{
-      --ink:#0b0b14;
-      --muted:#5b6070;
+      --ink:#161616;
+      --muted:#5b5b66;
       --card:#ffffff;
-      --accent:#ff6b35;
-      --accent-2:#00c2a8;
-      --ring: rgba(255,107,53,.35);
-      --shadow: 0 26px 60px rgba(11,11,20,.18);
-      --border: rgba(17,24,39,.08);
+      --accent:#ff6a3d;
+      --accent-2:#00b8a9;
+      --accent-3:#ffd166;
+      --shadow: 0 28px 60px rgba(15,15,20,.18);
+      --border: rgba(15,15,20,.08);
+      --bg-1:#f6efe5;
+      --bg-2:#e8f7f2;
+      --bg-3:#fff0f4;
     }
 
     *{ box-sizing:border-box; }
@@ -23,34 +26,56 @@
       margin:0;
       min-height:100vh;
       color:var(--ink);
-      font-family:"Nanum Gothic", "Apple SD Gothic Neo", sans-serif;
+      font-family:"Noto Sans KR", sans-serif;
       background:
-        radial-gradient(900px 700px at 15% 15%, rgba(255,107,53,.26), transparent 60%),
-        radial-gradient(800px 600px at 85% 25%, rgba(0,194,168,.22), transparent 60%),
-        radial-gradient(900px 700px at 20% 85%, rgba(255,210,117,.3), transparent 60%),
-        linear-gradient(120deg, #f8f6f1 0%, #e7f6f3 45%, #fef3ec 100%);
+        radial-gradient(900px 700px at 15% 10%, rgba(255,106,61,.22), transparent 60%),
+        radial-gradient(700px 600px at 85% 15%, rgba(0,184,169,.18), transparent 60%),
+        radial-gradient(800px 700px at 20% 85%, rgba(255,209,102,.25), transparent 60%),
+        linear-gradient(120deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-3) 100%);
       padding:32px;
     }
 
     .wrap{
-      max-width: 1100px;
+      max-width: 1140px;
       margin: 0 auto;
       display:grid;
-      gap:20px;
+      gap:18px;
     }
 
     header{
       display:flex;
       flex-wrap:wrap;
-      gap:16px;
       align-items:flex-end;
       justify-content:space-between;
+      gap:16px;
     }
 
-    header h1{
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-badge{
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-family:"Anton", sans-serif;
+      font-size:22px;
+      letter-spacing:.5px;
+      box-shadow: 0 16px 30px rgba(17,24,39,.25);
+    }
+
+    h1{
       margin:0;
-      font-family:"Space Grotesk", "Nanum Gothic", sans-serif;
-      font-size:32px;
+      font-family:"Source Serif 4", serif;
+      font-size:34px;
       letter-spacing:-.4px;
     }
 
@@ -62,7 +87,7 @@
     .layout{
       display:grid;
       gap:20px;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.1fr .9fr;
       align-items:start;
     }
 
@@ -80,204 +105,35 @@
       overflow:hidden;
     }
 
-    .lotto-hero{
-      background: linear-gradient(135deg, #111827, #1f2937);
+    .hero{
+      background: linear-gradient(135deg, #111827, #0f172a);
       color:#fff;
       border: none;
     }
 
-    .lotto-hero h2{
-      margin:0 0 10px;
-      font-family:"Space Grotesk", "Nanum Gothic", sans-serif;
+    .hero h2{
+      margin:0 0 8px;
+      font-family:"Source Serif 4", serif;
       font-size:26px;
     }
 
-    .lotto-hero p{ margin:0; color: rgba(255,255,255,.85); }
+    .hero p{ margin:0; color: rgba(255,255,255,.85); }
 
-    .controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      margin: 12px 0 10px;
-    }
-
-    .btn{
-      border: 0;
-      cursor:pointer;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-weight: 900;
-      color:white;
-      background: linear-gradient(135deg, #22c55e, #06b6d4, #6366f1);
-      box-shadow: 0 12px 26px rgba(16, 185, 129, .25);
-      transition: transform .12s ease, filter .12s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
-    .btn:active{ transform: translateY(1px) scale(.99); }
-
-    .btn2{
-      border: 0;
-      cursor:pointer;
-      padding: 12px 14px;
-      border-radius: 14px;
-      font-weight: 800;
-      color:#0b1020;
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 10px 22px rgba(0,0,0,.10);
-      transition: transform .12s ease, background .12s ease;
-    }
-    .btn2:hover{ transform: translateY(-1px); background: rgba(255,255,255,.98); }
-    .btn2:active{ transform: translateY(1px) scale(.99); }
-
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.6);
-      border: 1px solid rgba(255,255,255,.45);
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
-      font-weight: 800;
-    }
-    select{
-      border:0;
-      outline:none;
-      padding: 8px 10px;
-      border-radius: 12px;
-      font-weight: 800;
-      background: rgba(255,255,255,.95);
-      cursor:pointer;
-    }
-
-    .sets{
-      margin-top: 14px;
+    .filters{
+      margin-top:16px;
       display:grid;
+      gap:12px;
+    }
+
+    .row{
+      display:grid;
+      gap:12px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-    @media (max-width: 760px){
-      .sets{ grid-template-columns: 1fr; }
     }
 
-    .set{
-      border-radius: 16px;
-      padding: 14px 14px 12px;
-      background: rgba(255,255,255,.85);
-      border: 1px solid rgba(255,255,255,.45);
-      box-shadow: 0 12px 26px rgba(0,0,0,.10);
-      transition: transform .15s ease, box-shadow .15s ease;
-      overflow:hidden;
-      position:relative;
+    @media (max-width: 640px){
+      .row{ grid-template-columns: 1fr; }
     }
-    .set:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(0,0,0,.14);
-    }
-    .set::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(90deg, rgba(34,197,94,.14), rgba(59,130,246,.14), rgba(168,85,247,.14), rgba(244,63,94,.14));
-      opacity:.9;
-      pointer-events:none;
-    }
-
-    .set-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 10px;
-    }
-    .set-title{
-      font-weight: 1000;
-      letter-spacing: -.2px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .badge{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      color:#fff;
-      font-weight: 900;
-      background: linear-gradient(135deg, #f59e0b, #ef4444, #8b5cf6);
-      box-shadow: 0 10px 22px rgba(239, 68, 68, .18);
-    }
-
-    .nums{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .ball{
-      width: 46px; height: 46px;
-      border-radius: 999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 1000;
-      color: #0b1020;
-      box-shadow:
-        inset 0 2px 8px rgba(255,255,255,.55),
-        0 10px 18px rgba(0,0,0,.15);
-      user-select:none;
-      position: relative;
-      overflow:hidden;
-      transform: translateZ(0);
-    }
-    .ball::after{
-      content:"";
-      position:absolute;
-      inset:-8px;
-      background: radial-gradient(18px 18px at 25% 25%, rgba(255,255,255,.85), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .ball:hover{ transform: translateY(-1px) scale(1.02); transition: transform .12s ease; }
-
-    .c1{ background: linear-gradient(135deg, #fde047, #f59e0b); }
-    .c2{ background: linear-gradient(135deg, #93c5fd, #3b82f6); color:white; }
-    .c3{ background: linear-gradient(135deg, #86efac, #22c55e); }
-    .c4{ background: linear-gradient(135deg, #c4b5fd, #8b5cf6); color:white; }
-    .c5{ background: linear-gradient(135deg, #fda4af, #ef4444); color:white; }
-
-    .bonus{
-      outline: 3px solid rgba(255,255,255,.85);
-      box-shadow:
-        inset 0 2px 8px rgba(255,255,255,.6),
-        0 12px 22px rgba(239, 68, 68, .25);
-    }
-
-    .meta{
-      margin-top: 10px;
-      font-size: 13px;
-      color: rgba(10,12,22,.75);
-      font-weight: 700;
-    }
-
-    .form-card h2{
-      margin:0 0 6px;
-      font-family:"Space Grotesk", "Nanum Gothic", sans-serif;
-      font-size:22px;
-      letter-spacing:-.3px;
-    }
-
-    .form-card p{
-      margin:0 0 16px;
-      color:var(--muted);
-    }
-
-    form{ display:grid; gap:14px; }
 
     label{
       display:block;
@@ -286,268 +142,554 @@
       font-size:14px;
     }
 
-    input, textarea{
+    select, input[type="range"]{
       width:100%;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid #e1e4ea;
-      font-size:14px;
-      font-family:"Nanum Gothic", sans-serif;
-      background:#f9fafb;
-      outline:none;
-      transition: border .15s ease, box-shadow .15s ease, background .15s ease;
-    }
-
-    input:focus, textarea:focus{
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--ring);
-      background:#fff;
-    }
-
-    textarea{ min-height:120px; resize:vertical; }
-
-    .row{
-      display:grid;
-      gap:12px;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media (max-width: 640px){
-      .row{ grid-template-columns: 1fr; }
-    }
-
-    .submit{
       border:0;
-      border-radius:14px;
-      padding:14px 16px;
-      font-weight:800;
-      color:#111827;
+      outline:none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight:700;
+      background: rgba(255,255,255,.95);
       cursor:pointer;
-      background: linear-gradient(135deg, #ffd166, #ff7d51, #00c2a8);
-      box-shadow: 0 14px 30px rgba(17,24,39,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    }
+
+    .range-wrap{
+      background: rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 12px;
+      display:grid;
+      gap:6px;
+    }
+
+    .range-meta{
+      display:flex;
+      justify-content:space-between;
+      color: rgba(255,255,255,.8);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .btn{
+      border: 0;
+      cursor:pointer;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 900;
+      color:#0b1020;
+      background: linear-gradient(135deg, #ffd166, #ff8c5a, #00c2a8);
+      box-shadow: 0 12px 26px rgba(255, 140, 90, .25);
       transition: transform .12s ease, filter .12s ease;
     }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+    .btn:active{ transform: translateY(1px) scale(.99); }
 
-    .submit:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-    .submit:active{ transform: translateY(1px) scale(.99); }
+    .btn-ghost{
+      background: rgba(255,255,255,.9);
+      color:#0b1020;
+      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+    }
+
+    .result-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+
+    @media (max-width: 760px){
+      .result-grid{ grid-template-columns: 1fr; }
+    }
+
+    .meal-card{
+      border-radius:18px;
+      padding:16px;
+      background: rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.6);
+      box-shadow: 0 12px 26px rgba(0,0,0,.1);
+      position:relative;
+      overflow:hidden;
+      animation: rise .4s ease both;
+    }
+
+    .meal-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(255,106,61,.18), rgba(0,184,169,.14), rgba(255,209,102,.18));
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    .meal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meal-title{
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      color:#111827;
+      background: rgba(255,255,255,.9);
+      font-weight:800;
+      box-shadow: 0 8px 16px rgba(0,0,0,.08);
+    }
+
+    .meal-desc{
+      margin:8px 0 12px;
+      color: rgba(11, 16, 32, .75);
+      font-size:13px;
+      font-weight:600;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      background: rgba(255,255,255,.9);
+      border:1px solid rgba(255,255,255,.6);
+    }
+
+    .side-card h3{
+      margin:0 0 10px;
+      font-family:"Source Serif 4", serif;
+      font-size:22px;
+      letter-spacing:-.3px;
+    }
+
+    .side-card p{
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    .suggestions{
+      display:grid;
+      gap:10px;
+    }
+
+    .quick{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:700;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .quick:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(17,24,39,.12);
+    }
 
     .note{
       font-size:12px;
       color:var(--muted);
-      margin:0;
+      margin:12px 0 0;
+    }
+
+    .meta{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+      font-weight: 700;
+    }
+
+    .form-box{
+      margin-top:16px;
+      padding:16px;
+      border-radius:18px;
+      background:#fff7ee;
+      border:1px solid rgba(255,106,61,.18);
+      box-shadow: 0 10px 22px rgba(255,106,61,.12);
+    }
+
+    .form-box h4{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+
+    .form-grid{
+      display:grid;
+      gap:10px;
+    }
+
+    .form-grid label{
+      margin-bottom:4px;
+      font-size:12px;
+    }
+
+    .form-grid input,
+    .form-grid textarea{
+      width:100%;
+      border:1px solid rgba(15,15,20,.12);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      font-family:"Noto Sans KR", sans-serif;
+      background:#ffffff;
+      outline:none;
+      transition: border .12s ease, box-shadow .12s ease;
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus{
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,106,61,.25);
+    }
+
+    .form-grid textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .submit{
+      border:0;
+      border-radius:12px;
+      padding:12px 14px;
+      font-weight:900;
+      cursor:pointer;
+      background: linear-gradient(135deg, #ffbe7b, #ff6a3d);
+      color:#111827;
+      box-shadow: 0 10px 20px rgba(255,106,61,.2);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .submit:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+    .submit:active{ transform: translateY(1px) scale(.99); }
+
+    @keyframes rise{
+      from{ transform: translateY(8px); opacity:0; }
+      to{ transform: translateY(0); opacity:1; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
     <header>
-      <div>
-        <h1>로또 추천 + 제휴 문의</h1>
-        <div class="sub">로또 번호 생성과 제휴 문의를 한 페이지에서 처리하세요.</div>
+      <div class="logo">
+        <div class="logo-badge">DIN</div>
+        <div>
+          <h1>?? ?? ? ???</h1>
+          <div class="sub">??, ??, ??? ?? ?? ??? ? ?????.</div>
+        </div>
       </div>
+      <div class="sub">?? ??: ?? ? ?? ? ?? ?? ? ???</div>
     </header>
 
     <section class="layout">
-      <div class="card lotto-hero">
-        <h2>컬러풀 로또 5세트 추천기</h2>
-        <p>버튼 한 번에 5세트! (6개 + 보너스 1개)</p>
+      <div class="card hero">
+        <h2>?? ?? ???</h2>
+        <p>????? ???? ??? ??? ?? ??? ??? ?????.</p>
 
-        <div class="controls">
-          <button id="btn" class="btn">5세트 생성</button>
-          <button id="copy" class="btn2" type="button">전체 복사</button>
-
-          <div class="chip">
-            세트 수
-            <select id="count">
-              <option value="5" selected>5</option>
-              <option value="3">3</option>
-              <option value="10">10</option>
-            </select>
+        <div class="filters">
+          <div class="row">
+            <div>
+              <label for="mood">?? ???</label>
+              <select id="mood">
+                <option value="comfort" selected>??? ??</option>
+                <option value="fresh">??? ??</option>
+                <option value="party">???? ???</option>
+                <option value="diet">???</option>
+                <option value="late">?? ??</option>
+              </select>
+            </div>
+            <div>
+              <label for="style">?? ???</label>
+              <select id="style">
+                <option value="any" selected>????</option>
+                <option value="korean">??</option>
+                <option value="asian">???</option>
+                <option value="western">??</option>
+                <option value="fast">???</option>
+              </select>
+            </div>
           </div>
 
-          <div class="chip">
-            보너스 표시
-            <select id="bonusToggle">
-              <option value="on" selected>ON</option>
-              <option value="off">OFF</option>
-            </select>
+          <div class="row">
+            <div>
+              <label for="budget">??</label>
+              <select id="budget">
+                <option value="low">1?? ??</option>
+                <option value="mid" selected>1~2??</option>
+                <option value="high">2?? ??</option>
+              </select>
+            </div>
+            <div>
+              <label for="time">?? ??</label>
+              <select id="time">
+                <option value="quick">15? ?</option>
+                <option value="mid" selected>30? ?</option>
+                <option value="long">60? ??</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="range-wrap">
+            <label for="spice">??? ??</label>
+            <input id="spice" type="range" min="0" max="4" step="1" value="2" />
+            <div class="range-meta">
+              <span>???</span>
+              <span id="spiceLabel">??</span>
+              <span>???</span>
+            </div>
           </div>
         </div>
 
-        <div id="result" class="sets" aria-live="polite"></div>
-
-        <div class="meta">
-          생성 시간: <span id="time">-</span>
+        <div class="actions">
+          <button id="pick" class="btn">?? ?? ????</button>
+          <button id="shuffle" class="btn btn-ghost" type="button">?? ?? ??</button>
         </div>
+
+        <div id="results" class="result-grid" aria-live="polite"></div>
+        <div class="meta">???? ??: <span id="timeStamp">-</span></div>
       </div>
 
-      <div class="card form-card">
-        <h2>제휴 문의 폼</h2>
-        <p>필수 항목만 입력해 주세요. 제출하면 Formspree로 바로 전달됩니다.</p>
+      <div class="card side-card">
+        <h3>?? ??</h3>
+        <p>??? ?? ?? ??? ?? ?????.</p>
 
-        <form action="https://formspree.io/f/xbdoqkdp" method="POST">
-          <div class="row">
+        <div class="suggestions">
+          <button class="quick" data-preset="work">?? ? ???</button>
+          <button class="quick" data-preset="date">??? ??</button>
+          <button class="quick" data-preset="rain">? ?? ?</button>
+          <button class="quick" data-preset="diet">??? ??</button>
+        </div>
+
+        <div class="form-box">
+          <h4>?? ??</h4>
+          <form class="form-grid" action="https://formspree.io/f/xbdoqkdp" method="POST">
             <div>
-              <label for="name">담당자 이름</label>
-              <input id="name" name="name" type="text" placeholder="홍길동" required />
+              <label for="name">??? ??</label>
+              <input id="name" name="name" type="text" placeholder="???" required />
             </div>
             <div>
-              <label for="company">회사명</label>
+              <label for="company">???</label>
               <input id="company" name="company" type="text" placeholder="OOO" required />
             </div>
-          </div>
-
-          <div class="row">
             <div>
-              <label for="email">이메일</label>
+              <label for="email">???</label>
               <input id="email" name="email" type="email" placeholder="email@company.com" required />
             </div>
             <div>
-              <label for="phone">연락처</label>
-              <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" />
+              <label for="message">?? ??</label>
+              <textarea id="message" name="message" placeholder="?? ??, ??, ?? ?? ?? ?? ???." required></textarea>
             </div>
-          </div>
+            <button class="submit" type="submit">?? ?? ??</button>
+          </form>
+        </div>
 
-          <div>
-            <label for="message">문의 내용</label>
-            <textarea id="message" name="message" placeholder="제휴 목적, 일정, 기대 효과 등을 적어 주세요." required></textarea>
-          </div>
-
-          <button class="submit" type="submit">제휴 문의 제출</button>
-          <p class="note">제출 시 개인정보 처리에 동의한 것으로 간주합니다.</p>
-        </form>
+        <p class="note">* ?? ??? ?? ?? ???????. ????/??? ? ??????.</p>
       </div>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h3 style="margin:0 0 10px; font-family:'Source Serif 4', serif;">??</h3>
+      <div id="disqus_thread"></div>
+      <script>
+          /**
+          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+          /*
+          var disqus_config = function () {
+          this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+          */
+          (function() { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
+          s.src = 'https://wjsurapsb.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
   </main>
 
   <script>
-    const resultEl = document.getElementById("result");
+    const data = [
+      { name:"??? ??", style:"korean", mood:["comfort","work"], time:"quick", budget:"mid", spice:1, desc:"??? ???? ?? ???? ????.", tags:["???","???","??"] },
+      { name:"?????", style:"korean", mood:["late","work"], time:"quick", budget:"low", spice:2, desc:"??? ??? 10? ??, ?? ??? ???.", tags:["???","??","???"] },
+      { name:"???", style:"korean", mood:["party","comfort"], time:"mid", budget:"mid", spice:3, desc:"??? ?? ???? ?? ?? ?? ??.", tags:["??","??","???"] },
+      { name:"?????", style:"korean", mood:["comfort","rain"], time:"mid", budget:"low", spice:2, desc:"???? ???? ??? ??.", tags:["??","???","??"] },
+      { name:"?? ??", style:"asian", mood:["comfort","rain"], time:"mid", budget:"mid", spice:1, desc:"??? ??? ??? ???? ? ??.", tags:["??","??","???"] },
+      { name:"???", style:"asian", mood:["party","late"], time:"mid", budget:"high", spice:4, desc:"??? ??? ???? ???.", tags:["??","???","??"] },
+      { name:"???", style:"asian", mood:["fresh","diet"], time:"mid", budget:"mid", spice:0, desc:"??? ??? ??? ??.", tags:["???","??","???"] },
+      { name:"?? ??", style:"western", mood:["fresh","diet","date"], time:"quick", budget:"high", spice:0, desc:"??? ????, ??? ??.", tags:["???","???","???"] },
+      { name:"???? ???", style:"western", mood:["date","fresh"], time:"mid", budget:"high", spice:0, desc:"??? ????? ???? ??? ?.", tags:["???","???","???"] },
+      { name:"?? ???", style:"western", mood:["comfort","date"], time:"mid", budget:"mid", spice:0, desc:"???? ??? ???? ???.", tags:["????","??","???"] },
+      { name:"??? ???", style:"western", mood:["fresh","work"], time:"mid", budget:"mid", spice:1, desc:"??? ??? ???? ?? ??.", tags:["???","??","???"] },
+      { name:"?? & ??", style:"fast", mood:["party","late"], time:"quick", budget:"mid", spice:1, desc:"??? ???? ??? ??.", tags:["???","??","??"] },
+      { name:"???? ???", style:"fast", mood:["fresh","work"], time:"quick", budget:"mid", spice:0, desc:"??? ???? ??? ???.", tags:["??","???","???"] },
+      { name:"??", style:"asian", mood:["party","fresh"], time:"mid", budget:"mid", spice:2, desc:"??? ????? ?? ??.", tags:["???","??","???"] },
+      { name:"????+??", style:"korean", mood:["comfort","party"], time:"long", budget:"high", spice:1, desc:"? ?? ?? ??? ?? ??.", tags:["??","??","??"] },
+      { name:"????", style:"korean", mood:["fresh","late"], time:"quick", budget:"low", spice:3, desc:"???? ???? ???.", tags:["??","??","??"] }
+    ];
+
+    const moodEl = document.getElementById("mood");
+    const styleEl = document.getElementById("style");
+    const budgetEl = document.getElementById("budget");
     const timeEl = document.getElementById("time");
-    const countEl = document.getElementById("count");
-    const bonusToggleEl = document.getElementById("bonusToggle");
+    const spiceEl = document.getElementById("spice");
+    const spiceLabel = document.getElementById("spiceLabel");
+    const resultsEl = document.getElementById("results");
+    const stampEl = document.getElementById("timeStamp");
 
-    function randInt(min, max){
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function pickUniqueNumbers(count, min, max){
-      const set = new Set();
-      while(set.size < count){
-        set.add(randInt(min, max));
-      }
-      return [...set].sort((a,b)=>a-b);
-    }
-
-    function colorClass(n){
-      if (n <= 10) return "c1";
-      if (n <= 20) return "c2";
-      if (n <= 30) return "c3";
-      if (n <= 40) return "c4";
-      return "c5";
-    }
+    const spiceNames = ["??", "??", "??", "??", "??"];
 
     function nowKST(){
       return new Intl.DateTimeFormat("ko-KR",{
         timeZone:"Asia/Seoul",
         dateStyle:"medium",
-        timeStyle:"medium"
+        timeStyle:"short"
       }).format(new Date());
     }
 
-    function makeBall(n, extraClass=""){
-      const ball = document.createElement("div");
-      ball.className = `ball ${colorClass(n)} ${extraClass}`.trim();
-      ball.textContent = n;
-      return ball;
+    function pickMeal(){
+      const mood = moodEl.value;
+      const style = styleEl.value;
+      const budget = budgetEl.value;
+      const time = timeEl.value;
+      const spice = parseInt(spiceEl.value, 10);
+
+      let list = data.filter(item => item.mood.includes(mood) || item.mood.includes("work") && mood === "comfort");
+      if (style !== "any") list = list.filter(item => item.style === style);
+      list = list.filter(item => item.budget === budget || budget === "mid");
+      list = list.filter(item => item.time === time || time === "mid");
+      list = list.filter(item => Math.abs(item.spice - spice) <= 1);
+
+      if (list.length < 4){
+        list = data.filter(item => Math.abs(item.spice - spice) <= 2);
+      }
+
+      return shuffle(list).slice(0, 4);
     }
 
-    function generateOneSet(i, showBonus){
-      const main = pickUniqueNumbers(6, 1, 45);
-
-      let bonus = null;
-      if (showBonus){
-        do { bonus = randInt(1, 45); } while(main.includes(bonus));
+    function shuffle(arr){
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
       }
-
-      const setDiv = document.createElement("div");
-      setDiv.className = "set";
-
-      const head = document.createElement("div");
-      head.className = "set-head";
-
-      const title = document.createElement("div");
-      title.className = "set-title";
-      title.innerHTML = `세트 ${i+1} <span class="badge">추천</span>`;
-
-      head.appendChild(title);
-      setDiv.appendChild(head);
-
-      const numsDiv = document.createElement("div");
-      numsDiv.className = "nums";
-
-      main.forEach(n => numsDiv.appendChild(makeBall(n)));
-
-      if (showBonus && bonus !== null){
-        numsDiv.appendChild(makeBall(bonus, "bonus"));
-      }
-
-      setDiv.appendChild(numsDiv);
-
-      return { setDiv, main, bonus };
+      return copy;
     }
 
-    let latest = [];
-
-    function generateSets(){
-      const count = parseInt(countEl.value, 10);
-      const showBonus = (bonusToggleEl.value === "on");
-
-      latest = [];
-      resultEl.innerHTML = "";
-
-      for(let i=0;i<count;i++){
-        const { setDiv, main, bonus } = generateOneSet(i, showBonus);
-        latest.push({ main, bonus });
-        resultEl.appendChild(setDiv);
-      }
-
-      timeEl.textContent = nowKST();
-    }
-
-    async function copyAll(){
-      if (!latest.length){
-        alert("먼저 생성해줘 🙂");
-        return;
-      }
-      const showBonus = (bonusToggleEl.value === "on");
-      const lines = latest.map((s, idx) => {
-        const main = s.main.join(", ");
-        return showBonus
-          ? `세트 ${idx+1}: ${main} / 보너스: ${s.bonus}`
-          : `세트 ${idx+1}: ${main}`;
+    function render(){
+      const meals = pickMeal();
+      resultsEl.innerHTML = "";
+      meals.forEach((meal, idx) => {
+        const card = document.createElement("div");
+        card.className = "meal-card";
+        card.style.animationDelay = `${idx * 0.05}s`;
+        card.innerHTML = `
+          <div class="meal-head">
+            <div class="meal-title">${meal.name}</div>
+            <span class="tag">??</span>
+          </div>
+          <div class="meal-desc">${meal.desc}</div>
+          <div class="pill-row">
+            <span class="pill">??: ${budgetText(meal.budget)}</span>
+            <span class="pill">??: ${timeText(meal.time)}</span>
+            <span class="pill">???: ${spiceNames[meal.spice]}</span>
+          </div>
+        `;
+        resultsEl.appendChild(card);
       });
-      const text = lines.join("\n");
-
-      try{
-        await navigator.clipboard.writeText(text);
-        alert("전체 복사 완료! ✅");
-      }catch(e){
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-        alert("전체 복사 완료! ✅");
-      }
+      stampEl.textContent = nowKST();
     }
 
-    document.getElementById("btn").addEventListener("click", generateSets);
-    document.getElementById("copy").addEventListener("click", copyAll);
-    countEl.addEventListener("change", generateSets);
-    bonusToggleEl.addEventListener("change", generateSets);
+    function budgetText(val){
+      if (val === "low") return "1?? ??";
+      if (val === "mid") return "1~2??";
+      return "2?? ??";
+    }
 
-    generateSets();
+    function timeText(val){
+      if (val === "quick") return "15? ?";
+      if (val === "mid") return "30? ?";
+      return "60? ??";
+    }
+
+    function updateSpiceLabel(){
+      spiceLabel.textContent = spiceNames[parseInt(spiceEl.value, 10)];
+    }
+
+    document.getElementById("pick").addEventListener("click", render);
+    document.getElementById("shuffle").addEventListener("click", render);
+    spiceEl.addEventListener("input", () => {
+      updateSpiceLabel();
+    });
+
+    document.querySelectorAll(".quick").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const preset = btn.dataset.preset;
+        if (preset === "work"){
+          moodEl.value = "comfort";
+          styleEl.value = "any";
+          budgetEl.value = "mid";
+          timeEl.value = "quick";
+          spiceEl.value = 2;
+        }
+        if (preset === "date"){
+          moodEl.value = "fresh";
+          styleEl.value = "western";
+          budgetEl.value = "high";
+          timeEl.value = "mid";
+          spiceEl.value = 1;
+        }
+        if (preset === "rain"){
+          moodEl.value = "comfort";
+          styleEl.value = "korean";
+          budgetEl.value = "low";
+          timeEl.value = "mid";
+          spiceEl.value = 2;
+        }
+        if (preset === "diet"){
+          moodEl.value = "diet";
+          styleEl.value = "any";
+          budgetEl.value = "mid";
+          timeEl.value = "quick";
+          spiceEl.value = 0;
+        }
+        updateSpiceLabel();
+        render();
+      });
+    });
+
+    updateSpiceLabel();
+    render();
   </script>
 </body>
 </html>
