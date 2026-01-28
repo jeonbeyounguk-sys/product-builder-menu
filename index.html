@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>?? ?? ? ???</title>
+  <title>오늘 저녁 뭐 먹지?</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap");
 
@@ -401,132 +402,127 @@
       <div class="logo">
         <div class="logo-badge">DIN</div>
         <div>
-          <h1>?? ?? ? ???</h1>
-          <div class="sub">??, ??, ??? ?? ?? ??? ? ?????.</div>
+          <h1>오늘 저녁 뭐 먹지?</h1>
+          <div class="sub">기분, 예산, 시간에 맞춰 저녁 메뉴를 딱 골라드려요.</div>
         </div>
       </div>
-      <div class="sub">?? ??: ?? ? ?? ? ?? ?? ? ???</div>
+      <div class="sub">추천 기준: 기분 · 예산 · 준비 시간 · 매운맛</div>
     </header>
 
     <section class="layout">
       <div class="card hero">
-        <h2>?? ?? ???</h2>
-        <p>????? ???? ??? ??? ?? ??? ??? ?????.</p>
+        <h2>저녁 추천 메이커</h2>
+        <p>슬라이더와 선택지를 바꾸고 버튼을 눌러 오늘의 저녁을 받아보세요.</p>
 
         <div class="filters">
           <div class="row">
             <div>
-              <label for="mood">?? ???</label>
+              <label for="mood">오늘 분위기</label>
               <select id="mood">
-                <option value="comfort" selected>??? ??</option>
-                <option value="fresh">??? ??</option>
-                <option value="party">???? ???</option>
-                <option value="diet">???</option>
-                <option value="late">?? ??</option>
+                <option value="comfort" selected>따뜻한 위로</option>
+                <option value="fresh">상큼한 리셋</option>
+                <option value="party">친구들과 신나게</option>
+                <option value="diet">가볍게</option>
+                <option value="late">야식 느낌</option>
               </select>
             </div>
             <div>
-              <label for="style">?? ???</label>
+              <label for="style">선호 스타일</label>
               <select id="style">
-                <option value="any" selected>????</option>
-                <option value="korean">??</option>
-                <option value="asian">???</option>
-                <option value="western">??</option>
-                <option value="fast">???</option>
+                <option value="any" selected>상관없음</option>
+                <option value="korean">한식</option>
+                <option value="asian">아시안</option>
+                <option value="western">양식</option>
+                <option value="fast">간편식</option>
               </select>
             </div>
           </div>
 
           <div class="row">
             <div>
-              <label for="budget">??</label>
+              <label for="budget">예산</label>
               <select id="budget">
-                <option value="low">1?? ??</option>
-                <option value="mid" selected>1~2??</option>
-                <option value="high">2?? ??</option>
+                <option value="low">1만원 이하</option>
+                <option value="mid" selected>1~2만원</option>
+                <option value="high">2만원 이상</option>
               </select>
             </div>
             <div>
-              <label for="time">?? ??</label>
+              <label for="time">준비 시간</label>
               <select id="time">
-                <option value="quick">15? ?</option>
-                <option value="mid" selected>30? ?</option>
-                <option value="long">60? ??</option>
+                <option value="quick">15분 내</option>
+                <option value="mid" selected>30분 내</option>
+                <option value="long">60분 이상</option>
               </select>
             </div>
           </div>
 
           <div class="range-wrap">
-            <label for="spice">??? ??</label>
+            <label for="spice">매운맛 강도</label>
             <input id="spice" type="range" min="0" max="4" step="1" value="2" />
             <div class="range-meta">
-              <span>???</span>
-              <span id="spiceLabel">??</span>
-              <span>???</span>
+              <span>순한맛</span>
+              <span id="spiceLabel">보통</span>
+              <span>매운맛</span>
             </div>
           </div>
         </div>
 
         <div class="actions">
-          <button id="pick" class="btn">?? ?? ????</button>
-          <button id="shuffle" class="btn btn-ghost" type="button">?? ?? ??</button>
+          <button id="pick" class="btn">오늘 저녁 추천받기</button>
+          <button id="shuffle" class="btn btn-ghost" type="button">다른 조합 보기</button>
         </div>
 
         <div id="results" class="result-grid" aria-live="polite"></div>
-        <div class="meta">???? ??: <span id="timeStamp">-</span></div>
+        <div class="meta">업데이트 시간: <span id="timeStamp">-</span></div>
       </div>
 
       <div class="card side-card">
-        <h3>?? ??</h3>
-        <p>??? ?? ?? ??? ?? ?????.</p>
+        <h3>빠른 선택</h3>
+        <p>버튼을 눌러 추천 기준을 자동 세팅하세요.</p>
 
         <div class="suggestions">
-          <button class="quick" data-preset="work">?? ? ???</button>
-          <button class="quick" data-preset="date">??? ??</button>
-          <button class="quick" data-preset="rain">? ?? ?</button>
-          <button class="quick" data-preset="diet">??? ??</button>
+          <button class="quick" data-preset="work">퇴근 후 빠르게</button>
+          <button class="quick" data-preset="date">데이트 무드</button>
+          <button class="quick" data-preset="rain">비 오는 날</button>
+          <button class="quick" data-preset="diet">가볍게 먹기</button>
         </div>
 
         <div class="form-box">
-          <h4>?? ??</h4>
+          <h4>제휴 문의</h4>
           <form class="form-grid" action="https://formspree.io/f/xbdoqkdp" method="POST">
             <div>
-              <label for="name">??? ??</label>
-              <input id="name" name="name" type="text" placeholder="???" required />
+              <label for="name">담당자 이름</label>
+              <input id="name" name="name" type="text" placeholder="홍길동" required />
             </div>
             <div>
-              <label for="company">???</label>
+              <label for="company">회사명</label>
               <input id="company" name="company" type="text" placeholder="OOO" required />
             </div>
             <div>
-              <label for="email">???</label>
+              <label for="email">이메일</label>
               <input id="email" name="email" type="email" placeholder="email@company.com" required />
             </div>
             <div>
-              <label for="message">?? ??</label>
-              <textarea id="message" name="message" placeholder="?? ??, ??, ?? ?? ?? ?? ???." required></textarea>
+              <label for="message">문의 내용</label>
+              <textarea id="message" name="message" placeholder="제휴 목적, 일정, 기대 효과 등을 적어 주세요." required></textarea>
             </div>
-            <button class="submit" type="submit">?? ?? ??</button>
+            <button class="submit" type="submit">제휴 문의 제출</button>
           </form>
         </div>
 
-        <p class="note">* ?? ??? ?? ?? ???????. ????/??? ? ??????.</p>
+        <p class="note">* 모든 추천은 취향 기반 아이디어입니다. 알레르기/기호는 꼭 체크해주세요.</p>
       </div>
     </section>
 
     <section class="card" style="margin-top:20px;">
-      <h3 style="margin:0 0 10px; font-family:'Source Serif 4', serif;">??</h3>
+      <h3 style="margin:0 0 10px; font-family:'Source Serif 4', serif;">댓글</h3>
       <div id="disqus_thread"></div>
       <script>
-          /**
-          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-          /*
           var disqus_config = function () {
-          this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          this.page.url = window.location.href;
+          this.page.identifier = window.location.pathname || "dinner-menu";
           };
-          */
           (function() { // DON'T EDIT BELOW THIS LINE
           var d = document, s = d.createElement('script');
           s.src = 'https://wjsurapsb.disqus.com/embed.js';
@@ -540,22 +536,22 @@
 
   <script>
     const data = [
-      { name:"??? ??", style:"korean", mood:["comfort","work"], time:"quick", budget:"mid", spice:1, desc:"??? ???? ?? ???? ????.", tags:["???","???","??"] },
-      { name:"?????", style:"korean", mood:["late","work"], time:"quick", budget:"low", spice:2, desc:"??? ??? 10? ??, ?? ??? ???.", tags:["???","??","???"] },
-      { name:"???", style:"korean", mood:["party","comfort"], time:"mid", budget:"mid", spice:3, desc:"??? ?? ???? ?? ?? ?? ??.", tags:["??","??","???"] },
-      { name:"?????", style:"korean", mood:["comfort","rain"], time:"mid", budget:"low", spice:2, desc:"???? ???? ??? ??.", tags:["??","???","??"] },
-      { name:"?? ??", style:"asian", mood:["comfort","rain"], time:"mid", budget:"mid", spice:1, desc:"??? ??? ??? ???? ? ??.", tags:["??","??","???"] },
-      { name:"???", style:"asian", mood:["party","late"], time:"mid", budget:"high", spice:4, desc:"??? ??? ???? ???.", tags:["??","???","??"] },
-      { name:"???", style:"asian", mood:["fresh","diet"], time:"mid", budget:"mid", spice:0, desc:"??? ??? ??? ??.", tags:["???","??","???"] },
-      { name:"?? ??", style:"western", mood:["fresh","diet","date"], time:"quick", budget:"high", spice:0, desc:"??? ????, ??? ??.", tags:["???","???","???"] },
-      { name:"???? ???", style:"western", mood:["date","fresh"], time:"mid", budget:"high", spice:0, desc:"??? ????? ???? ??? ?.", tags:["???","???","???"] },
-      { name:"?? ???", style:"western", mood:["comfort","date"], time:"mid", budget:"mid", spice:0, desc:"???? ??? ???? ???.", tags:["????","??","???"] },
-      { name:"??? ???", style:"western", mood:["fresh","work"], time:"mid", budget:"mid", spice:1, desc:"??? ??? ???? ?? ??.", tags:["???","??","???"] },
-      { name:"?? & ??", style:"fast", mood:["party","late"], time:"quick", budget:"mid", spice:1, desc:"??? ???? ??? ??.", tags:["???","??","??"] },
-      { name:"???? ???", style:"fast", mood:["fresh","work"], time:"quick", budget:"mid", spice:0, desc:"??? ???? ??? ???.", tags:["??","???","???"] },
-      { name:"??", style:"asian", mood:["party","fresh"], time:"mid", budget:"mid", spice:2, desc:"??? ????? ?? ??.", tags:["???","??","???"] },
-      { name:"????+??", style:"korean", mood:["comfort","party"], time:"long", budget:"high", spice:1, desc:"? ?? ?? ??? ?? ??.", tags:["??","??","??"] },
-      { name:"????", style:"korean", mood:["fresh","late"], time:"quick", budget:"low", spice:3, desc:"???? ???? ???.", tags:["??","??","??"] }
+      { name:"불고기 덮밥", style:"korean", mood:["comfort","work"], time:"quick", budget:"mid", spice:1, desc:"달큰한 불고기에 반숙 계란으로 든든하게.", tags:["달큰함","한그릇","집밥"] },
+      { name:"김치볶음밥", style:"korean", mood:["late","work"], time:"quick", budget:"low", spice:2, desc:"냉장고 재료로 10분 완성, 치즈 얹어도 좋아요.", tags:["초간단","야식","한그릇"] },
+      { name:"닭갈비", style:"korean", mood:["party","comfort"], time:"mid", budget:"mid", spice:3, desc:"채소와 닭을 매콤하게 볶아 같이 먹는 메뉴.", tags:["매콤","함께","포만감"] },
+      { name:"순두부찌개", style:"korean", mood:["comfort","rain"], time:"mid", budget:"low", spice:2, desc:"부드러운 순두부에 칼칼한 국물.", tags:["국물","따뜻함","집밥"] },
+      { name:"미소 라멘", style:"asian", mood:["comfort","rain"], time:"mid", budget:"mid", spice:1, desc:"따뜻한 국물과 차슈로 위로되는 한 그릇.", tags:["국물","일식","따뜻함"] },
+      { name:"마라탕", style:"asian", mood:["party","late"], time:"mid", budget:"high", spice:4, desc:"얼얼한 마라로 스트레스 날리기.", tags:["강렬","매운맛","중식"] },
+      { name:"쌀국수", style:"asian", mood:["fresh","diet"], time:"mid", budget:"mid", spice:0, desc:"향긋한 허브와 담백한 국물.", tags:["가벼움","국물","베트남"] },
+      { name:"연어 포케", style:"western", mood:["fresh","diet","date"], time:"quick", budget:"high", spice:0, desc:"차갑고 상큼하게, 단백질 충전.", tags:["가벼움","샐러드","단백질"] },
+      { name:"스테이크 샐러드", style:"western", mood:["date","fresh"], time:"mid", budget:"high", spice:0, desc:"큼직한 스테이크와 샐러드로 분위기 업.", tags:["데이트","고단백","샐러드"] },
+      { name:"크림 파스타", style:"western", mood:["comfort","date"], time:"mid", budget:"mid", spice:0, desc:"부드러운 크림과 버섯으로 포근함.", tags:["부드러움","양식","포만감"] },
+      { name:"토마토 파스타", style:"western", mood:["fresh","work"], time:"mid", budget:"mid", spice:1, desc:"상큼한 토마토 베이스로 기분 리셋.", tags:["상큼함","양식","한그릇"] },
+      { name:"치킨 & 감자", style:"fast", mood:["party","late"], time:"quick", budget:"mid", spice:1, desc:"바삭한 치킨으로 소소한 파티.", tags:["바삭함","친구","배달"] },
+      { name:"샌드위치 플래터", style:"fast", mood:["fresh","work"], time:"quick", budget:"mid", spice:0, desc:"재료만 준비하면 끝나는 간편식.", tags:["간단","가벼움","브런치"] },
+      { name:"타코", style:"asian", mood:["party","fresh"], time:"mid", budget:"mid", spice:2, desc:"바삭한 토르티야에 재료 가득.", tags:["캐주얼","함께","멕시칸"] },
+      { name:"된장찌개+삼겹", style:"korean", mood:["comfort","party"], time:"long", budget:"high", spice:1, desc:"쌈 싸서 먹는 한국식 저녁 정석.", tags:["든든","고기","집밥"] },
+      { name:"비빔국수", style:"korean", mood:["fresh","late"], time:"quick", budget:"low", spice:3, desc:"시원하고 새콤하게 매운맛.", tags:["새콤","매콤","여름"] }
     ];
 
     const moodEl = document.getElementById("mood");
@@ -567,7 +563,7 @@
     const resultsEl = document.getElementById("results");
     const stampEl = document.getElementById("timeStamp");
 
-    const spiceNames = ["??", "??", "??", "??", "??"];
+    const spiceNames = ["순함", "살짝", "보통", "매콤", "강렬"];
 
     function nowKST(){
       return new Intl.DateTimeFormat("ko-KR",{
@@ -616,13 +612,13 @@
         card.innerHTML = `
           <div class="meal-head">
             <div class="meal-title">${meal.name}</div>
-            <span class="tag">??</span>
+            <span class="tag">추천</span>
           </div>
           <div class="meal-desc">${meal.desc}</div>
           <div class="pill-row">
-            <span class="pill">??: ${budgetText(meal.budget)}</span>
-            <span class="pill">??: ${timeText(meal.time)}</span>
-            <span class="pill">???: ${spiceNames[meal.spice]}</span>
+            <span class="pill">예산: ${budgetText(meal.budget)}</span>
+            <span class="pill">시간: ${timeText(meal.time)}</span>
+            <span class="pill">매운맛: ${spiceNames[meal.spice]}</span>
           </div>
         `;
         resultsEl.appendChild(card);
@@ -631,15 +627,15 @@
     }
 
     function budgetText(val){
-      if (val === "low") return "1?? ??";
-      if (val === "mid") return "1~2??";
-      return "2?? ??";
+      if (val === "low") return "1만원 이하";
+      if (val === "mid") return "1~2만원";
+      return "2만원 이상";
     }
 
     function timeText(val){
-      if (val === "quick") return "15? ?";
-      if (val === "mid") return "30? ?";
-      return "60? ??";
+      if (val === "quick") return "15분 내";
+      if (val === "mid") return "30분 내";
+      return "60분 이상";
     }
 
     function updateSpiceLabel(){
